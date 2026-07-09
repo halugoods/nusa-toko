@@ -11,19 +11,34 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;forced-color-adjust:none;-ms-high-contrast-adjust:none;-webkit-color-adjust:exact;color-adjust:exact}
 
-/* ─── Design Tokens (Light Mode) ─── */
+/* ─── Design Tokens (NUSA System — Source of Truth) ─── */
 :root{
   color-scheme:light;
-  --red:#E53935;--red-dark:#C62828;--red-soft:#FEECEC;--red-glow:rgba(229,57,53,0.12);
-  --success:#16A34A;--warning:#F59E0B;--error:#DC2626;--info:#2563EB;
-  --bg:#F8F9FC;--surface:#FFFFFF;--workspace:#FFFFFF;
-  --ambient:radial-gradient(ellipse at 50% 0%,#FFF8F8 0%,#FFFDFD 45%,#FFFFFF 100%);
-  --text:#111827;--text2:#6B7280;--text3:#9CA3AF;--text4:#D1D5DB;
-  --border:#F1F5F9;--border2:#E5E7EB;--divider:#F3F4F6;
-  --shadow-card:0 2px 6px rgba(15,23,42,0.04),0 12px 24px rgba(15,23,42,0.04);
-  --shadow-elevated:0 4px 10px rgba(15,23,42,0.05),0 18px 36px rgba(15,23,42,0.05);
-  --shadow-omset:0 2px 6px rgba(15,23,42,0.04),0 12px 24px rgba(15,23,42,0.04);
-  --r-card:12px;--r-btn:12px;--r-input:12px;--r-chip:999px;--r-sm:12px;
+  --nusa-red:#E63946;--nusa-red-dark:#C1121F;--nusa-red-soft:#FDE8EA;--nusa-red-50:#FEF2F3;
+  --nusa-green:#10B981;--nusa-green-dark:#059669;
+  --nusa-purple:#8B5CF6;--nusa-purple-dark:#7C3AED;
+  --nusa-gold:#F59E0B;
+  --nusa-bg:#F7F7F9;--nusa-surface:#FFFFFF;--nusa-surface-2:#FAFAFA;
+  --nusa-text-primary:#1F2937;--nusa-text-secondary:#6B7280;--nusa-text-tertiary:#9CA3AF;
+  --nusa-border:#F3F4F6;--nusa-divider:#E5E7EB;
+  --nusa-shadow-xs:0 1px 2px rgba(17,24,39,0.04);
+  --nusa-shadow-sm:0 1px 3px rgba(17,24,39,0.06),0 1px 2px rgba(17,24,39,0.04);
+  --nusa-shadow-md:0 4px 12px rgba(17,24,39,0.08);
+  --nusa-shadow-red:0 8px 24px rgba(230,57,70,0.28);
+  --nusa-shadow-green:0 4px 12px rgba(16,185,129,0.3);
+  --nusa-shadow-purple:0 4px 12px rgba(139,92,246,0.3);
+  --nusa-radius-sm:8px;--nusa-radius-md:12px;--nusa-radius-lg:16px;--nusa-radius-xl:20px;--nusa-radius-full:9999px;
+  --nusa-font:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+
+  /* Legacy aliases (backward compat) */
+  --red:var(--nusa-red);--red-dark:var(--nusa-red-dark);--red-soft:var(--nusa-red-soft);
+  --success:var(--nusa-green);--warning:var(--nusa-gold);--error:#DC2626;--info:#2563EB;
+  --red-glow:rgba(230,57,70,0.12);
+  --bg:var(--nusa-bg);--surface:var(--nusa-surface);--workspace:var(--nusa-surface);
+  --text:var(--nusa-text-primary);--text2:var(--nusa-text-secondary);--text3:var(--nusa-text-tertiary);--text4:#D1D5DB;
+  --border:var(--nusa-border);--border2:var(--nusa-divider);--divider:var(--nusa-surface-2);
+  --shadow-card:var(--nusa-shadow-sm);--shadow-elevated:var(--nusa-shadow-md);--shadow-omset:var(--nusa-shadow-sm);
+  --r-card:var(--nusa-radius-lg);--r-btn:var(--nusa-radius-md);--r-input:var(--nusa-radius-md);--r-chip:var(--nusa-radius-full);--r-sm:var(--nusa-radius-sm);
   --ease-out:cubic-bezier(0.33,1,0.68,1);
   --ease-in:cubic-bezier(0.32,0,0.67,0);
   --ease-in-out:cubic-bezier(0.65,0,0.35,1);
@@ -33,33 +48,14 @@
   --card-sheen:transparent;
 }
 
-[data-theme="dark"]{
-  color-scheme:dark;
-  --bg:#03050C;--surface:rgba(18,22,38,0.72);--workspace:rgba(18,22,38,0.72);
-  --ambient:transparent;
-  --text:#FFFFFF;--text2:rgba(255,255,255,0.72);--text3:rgba(255,255,255,0.40);--text4:rgba(255,255,255,0.15);
-  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.10);--divider:rgba(255,255,255,0.04);
-  --shadow-card:0 2px 8px rgba(0,0,0,0.30),0 12px 24px rgba(0,0,0,0.40);
-  --shadow-elevated:0 4px 12px rgba(0,0,0,0.35),0 18px 36px rgba(0,0,0,0.45);
-  --shadow-omset:0 2px 8px rgba(0,0,0,0.30),0 12px 24px rgba(0,0,0,0.40);
-  --card-glow:rgba(168,85,247,0.06);
-  --card-sheen:linear-gradient(90deg,transparent,rgba(255,255,255,0.20),transparent);
-  --red-soft:rgba(229,57,53,0.12);
-  --red-glow:rgba(229,57,53,0.25);
-}
+body{font-family:var(--nusa-font);background:var(--nusa-bg);color:var(--nusa-text-primary);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;display:flex;flex-direction:column;align-items:center;padding:0;min-height:100vh;transition:background 0.3s,color 0.3s}
 
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;align-items:center;padding:20px;min-height:100vh;transition:background 0.3s,color 0.3s}
-
-/* ─── Dark Mode Ambient ─── */
-[data-theme="dark"] body::before{
-  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
-  background:radial-gradient(70% 55% at 50% -10%,rgba(168,85,247,0.12) 0%,transparent 60%),radial-gradient(50% 50% at 85% 10%,rgba(59,130,246,0.06) 0%,transparent 55%),radial-gradient(40% 40% at 8% 90%,rgba(229,57,53,0.04) 0%,transparent 55%);
+/* ─── Device Frame (Phone container - match ZAI) ─── */
+.device-frame{width:100%;max-width:420px;min-height:100vh;overflow:hidden;position:relative;padding-bottom:92px;transition:background 0.3s,box-shadow 0.3s;box-shadow:0 0 40px rgba(17,24,39,0.08);background:var(--nusa-bg)}
+@media(min-width:640px){
+  .device-frame{min-height:880px;border-radius:32px;overflow:hidden;margin:24px auto;border:10px solid #111827;box-shadow:0 0 0 1px rgba(15,23,42,0.03),0 20px 60px rgba(0,0,0,0.12)}
 }
-[data-theme="dark"] body::after{
-  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");opacity:0.5;
-}
-
+[data-theme="dark"] .device-frame{box-shadow:0 0 0 1px rgba(255,255,255,0.06)}
 /* ─── Login Overlay ─── */
 #login-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(3,5,12,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center;z-index:9999;transition:opacity 0.3s}
 #login-overlay.show{display:flex}
@@ -112,241 +108,92 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 .stagger-scale{opacity:0;transform:scale(0.95);animation:staggerScale 0.25s var(--ease-out) forwards}
 @keyframes staggerScale{0%{opacity:0;transform:scale(0.95)}100%{opacity:1;transform:scale(1)}}
 
-/* ─── Home ─── */
-.home-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-top:4px}
-.home-header-left{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
-.home-user-btn{width:32px;height:32px;border-radius:50%;border:none;background:var(--divider);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);font-size:12px;font-weight:700;transition:all 0.12s;flex-shrink:0}
-.home-user-btn:hover{background:var(--border2);color:var(--text);transform:scale(1.05)}
-.home-user-info{flex:1;min-width:0}
-.home-user-name{font-size:15px;font-weight:600;letter-spacing:-0.02em;color:var(--text)}
-.home-user-role{font-size:11px;color:var(--text3);margin-top:1px;font-weight:500}
-.home-notif{width:36px;height:36px;border-radius:50%;border:none;background:var(--divider);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);transition:all 0.12s;flex-shrink:0}
-.home-notif:hover{background:var(--border2);color:var(--text);transform:scale(1.05)}
-.home-notif svg{width:18px;height:18px}
+/* ─── Home (ZAI Design System) ─── */
 
-	/* ─── Karyawan Card (Single) — RED COMPACT ─── */
-		.kry-card-single {
-		  background: linear-gradient(135deg, var(--red) 0%, #C62828 100%);
-		  border-radius: 20px;
-		  padding: 14px 16px;
-		  margin-bottom: 16px;
-		  box-shadow: 0 2px 8px rgba(229,57,53,0.18), 0 12px 24px rgba(0,0,0,0.08);
-		  position: relative;
-		  overflow: visible;
-		  color: #fff;
-		}
-	[data-theme="dark"] .kry-card-single {
-	  box-shadow: 0 2px 8px rgba(0,0,0,0.30), 0 12px 24px rgba(0,0,0,0.40), 0 0 30px -10px rgba(229,57,53,0.3);
-	}
-	
-	/* Red ambient icon */
-	.kry-card-single::after {
-	  content: '';
-	  position: absolute;
-	  right: -20px;
-	  top: -20px;
-	  width: 120px;
-	  height: 120px;
-	  background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
-	  pointer-events: none;
-	  border-radius: 50%;
-	}
-	
-	.kry-card-single .kry-main {
-	  display: flex;
-	  gap: 10px;
-	  align-items: center;
-	}
-	.kry-card-single .kry-photo {
-	  width: 40px;
-	  height: 40px;
-	  border-radius: 12px;
-	  background: rgba(255,255,255,0.15);
-	  display: flex;
-	  align-items: center;
-	  justify-content: center;
-	  font-size: 16px;
-	  font-weight: 700;
-	  color: #fff;
-	  flex-shrink: 0;
-	  overflow: hidden;
-	  backdrop-filter: blur(4px);
-	}
-	.kry-card-single .kry-photo img {
-	  width: 100%;
-	  height: 100%;
-	  object-fit: cover;
-	  border-radius: 12px;
-	}
-	.kry-card-single .kry-info {
-	  flex: 1;
-	  min-width: 0;
-	}
-	.kry-card-single .kry-name {
-	  font-size: 14px;
-	  font-weight: 700;
-	  color: #fff;
-	  letter-spacing: -0.02em;
-	  line-height: 1.2;
-	}
-	.kry-card-single .kry-role {
-	  font-size: 10px;
-	  color: rgba(255,255,255,0.65);
-	  margin-top: 0;
-	  white-space: nowrap;
-	  overflow: hidden;
-	  text-overflow: ellipsis;
-	}
-	.kry-card-single .kry-stat {
-	  font-size: 10px;
-	  color: rgba(255,255,255,0.5);
-	  margin-top: 0;
-	  font-weight: 500;
-	}
+/* ─── AppHeader ─── */
+.home-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px 12px;min-height:60px}
+.home-header-left{display:flex;align-items:center;gap:12px}
+.home-user-btn{width:32px;height:32px;border-radius:var(--nusa-radius-sm);border:none;background:var(--nusa-surface);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--nusa-text-secondary);font-size:12px;font-weight:700;transition:all 0.12s;flex-shrink:0;box-shadow:var(--nusa-shadow-xs)}
+.home-user-btn:hover{box-shadow:var(--nusa-shadow-sm);color:var(--nusa-text-primary);transform:scale(1.05)}
+.home-user-info{display:flex;flex-direction:column;gap:0;line-height:1.2}
+.home-user-name{font-size:13px;font-weight:600;color:var(--nusa-text-primary)}
+.home-user-role{font-size:11px;color:var(--nusa-text-secondary)}
+.home-notif{width:44px;height:44px;border-radius:50%;border:none;background:transparent;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;color:var(--nusa-text-primary);transition:all 0.12s;flex-shrink:0;position:relative}
+.home-notif:hover{background:rgba(0,0,0,0.04);transform:scale(1.05)}
+.home-notif:active{transform:scale(0.95)}
+.home-notif svg{width:22px;height:22px}
+.home-notif-dot{position:absolute;top:9px;right:10px;width:9px;height:9px;border-radius:50%;background:var(--nusa-red);border:2px solid var(--nusa-bg)}
 
-		/* ─── Icon Buttons ─── */
-		.kry-btn-group {
-		  display: flex;
-		  gap: 5px;
-		  align-items: center;
-		  flex-shrink: 0;
-		}
-		.kry-icon-btn {
-		  width: 34px;
-		  height: 34px;
-		  border-radius: 50%;
-		  border: none;
-		  display: flex;
-		  align-items: center;
-		  justify-content: center;
-		  cursor: pointer;
-		  flex-shrink: 0;
-		  transition: all 0.15s;
-		  box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
-		}
-		.kry-icon-btn svg { width: 15px; height: auto; }
-		.kry-icon-btn svg path { fill: #fff; }
-		.kry-icon-btn:active { transform: scale(0.92); }
-		.kry-icon-btn.green { background: linear-gradient(135deg, #16A34A, #15803D); }
-		.kry-icon-btn.red { background: linear-gradient(135deg, #E53935, #C62828); }
-		.kry-icon-btn.gray { background: #6B7280; cursor: default; opacity: 0.6; pointer-events: none; }
-		.kry-icon-btn.blue { background: linear-gradient(135deg, #6366F1, #4F46E5); }
-		/* ─── Custom SVG Checkbox ─── */
-		.kry-check-input { display: none; }
-		.kry-check-wrap {
-		  cursor: pointer;
-		  position: relative;
-		  width: 18px;
-		  height: 18px;
-		  -webkit-tap-highlight-color: transparent;
-		  transform: translate3d(0,0,0);
-		  display: inline-flex;
-		  align-items: center;
-		  justify-content: center;
-		  flex-shrink: 0;
-		}
-		.kry-check-wrap:before {
-		  content: "";
-		  position: absolute;
-		  top: -15px;
-		  left: -15px;
-		  width: 48px;
-		  height: 48px;
-		  border-radius: 50%;
-		  background: rgba(34,50,84,0.03);
-		  opacity: 0;
-		  transition: opacity 0.2s ease;
-		}
-		.kry-check-wrap svg {
-		  position: relative;
-		  z-index: 1;
-		  fill: none;
-		  stroke-linecap: round;
-		  stroke-linejoin: round;
-		  stroke: #c8ccd4;
-		  stroke-width: 1.5;
-		  transform: translate3d(0,0,0);
-		  transition: all 0.2s ease;
-		}
-		.kry-check-wrap svg path {
-		  stroke-dasharray: 60;
-		  stroke-dashoffset: 0;
-		}
-		.kry-check-wrap svg polyline {
-		  stroke-dasharray: 22;
-		  stroke-dashoffset: 66;
-		}
-		.kry-check-wrap:hover:before { opacity: 1; }
-		.kry-check-wrap:hover svg { stroke: var(--red); }
-		.kry-check-input:checked + .kry-check-wrap svg { stroke: var(--red); }
-		.kry-check-input:checked + .kry-check-wrap svg path {
-		  stroke-dashoffset: 60;
-		  transition: all 0.3s linear;
-		}
-		.kry-check-input:checked + .kry-check-wrap svg polyline {
-		  stroke-dashoffset: 42;
-		  transition: all 0.2s linear;
-		  transition-delay: 0.15s;
-		}
+/* ─── StoreSelector ─── */
+.store-card{display:flex;align-items:center;gap:12px;background:var(--nusa-surface);border-radius:var(--nusa-radius-lg);padding:16px;box-shadow:var(--nusa-shadow-sm);border:1px solid var(--nusa-border);cursor:pointer;transition:all 0.15s ease;margin:0 20px}
+.store-card:hover{box-shadow:var(--nusa-shadow-md);transform:translateY(-1px)}
+.store-card:active{transform:scale(0.99)}
+.store-avatar{width:44px;height:44px;border-radius:50%;background:var(--nusa-red);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;flex-shrink:0}
+.store-info{flex:1;min-width:0}
+.store-name{font-size:15px;font-weight:600;color:var(--nusa-text-primary);line-height:1.2}
+.store-branch{font-size:12px;color:var(--nusa-text-secondary);margin-top:1px;display:flex;align-items:center;gap:4px}
+.store-chevron{color:var(--nusa-text-tertiary);flex-shrink:0;transition:transform 0.2s}
+.store-card:hover .store-chevron{color:var(--nusa-text-secondary);transform:translateX(2px)}
 
-		/* ─── Ringkasan horizontal — no emoji ─── */
-	.kry-ringkasan {
-	  margin-top: 10px;
-	  padding-top: 10px;
-	  border-top: 1px solid rgba(255,255,255,0.12);
-	  display: flex;
-	  gap: 6px;
-	}
-	.kry-ringkasan .kr-item {
-	  flex: 1;
-	  min-width: 0;
-	  background: rgba(255,255,255,0.08);
-	  border-radius: 10px;
-	  padding: 7px 4px 6px;
-	  text-align: center;
-	  backdrop-filter: blur(4px);
-	  position: relative;
-	  overflow: hidden;
-	}
-	.kry-ringkasan .kr-svg-icon {
-	  width: 16px;
-	  height: 16px;
-	  display: inline-flex;
-	  align-items: center;
-	  justify-content: center;
-	  margin-bottom: 3px;
-	}
-	.kry-ringkasan .kr-svg-icon svg {
-	  width: 100%;
-	  height: 100%;
-	  fill: rgba(255,255,255,0.6);
-	}
-	.kry-ringkasan .kr-val {
-	  font-size: 12px;
-	  font-weight: 700;
-	  color: #fff;
-	  line-height: 1.2;
-	  letter-spacing: -0.02em;
-	  white-space: nowrap;
-	  overflow: hidden;
-	  text-overflow: ellipsis;
-	}
-	.kry-ringkasan .kr-label {
-	  font-size: 7px;
-	  font-weight: 600;
-	  color: rgba(255,255,255,0.45);
-	  text-transform: uppercase;
-	  letter-spacing: 0.06em;
-	  margin-top: 1px;
-	}
-	.kry-ringkasan .kr-prod {
-	  font-size: 7px;
-	  color: rgba(255,255,255,0.4);
-	  margin-top: 1px;
-	  white-space: nowrap;
-	  overflow: hidden;
-	  text-overflow: ellipsis;
-	}
+/* ─── ProfileCard (Red Hero) ─── */
+.kry-card-single{
+  background:linear-gradient(135deg,var(--nusa-red) 0%,var(--nusa-red-dark) 100%);
+  border-radius:var(--nusa-radius-xl);
+  padding:20px;
+  box-shadow:var(--nusa-shadow-red);
+  position:relative;overflow:hidden;color:#fff;margin:0 20px
+}
+.kry-card-single::after{content:'';position:absolute;top:-40px;right:-30px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,0.08);pointer-events:none}
+.kry-card-single::before{content:'';position:absolute;bottom:-50px;left:-20px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,0.05);pointer-events:none}
+
+.kry-hero{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;position:relative;z-index:1}
+.kry-hero-left{display:flex;align-items:center;gap:12px}
+.kry-hero-avatar{width:56px;height:56px;border-radius:var(--nusa-radius-lg);background:rgba(255,255,255,0.22);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff;flex-shrink:0;overflow:hidden;border:1px solid rgba(255,255,255,0.25)}
+.kry-hero-avatar img{width:100%;height:100%;object-fit:cover;border-radius:var(--nusa-radius-lg)}
+.kry-hero-info{display:flex;flex-direction:column;gap:1px;line-height:1.2}
+.kry-hero-name{font-size:18px;font-weight:700;color:#fff;letter-spacing:-0.01em}
+.kry-hero-role{font-size:12px;color:rgba(255,255,255,0.9);margin-top:0}
+.kry-hero-stat{font-size:11px;color:rgba(255,255,255,0.95);margin-top:4px;display:flex;align-items:center;gap:4px}
+.kry-hero-actions{display:flex;flex-direction:column;gap:8px;flex-shrink:0}
+.kry-icon-btn{width:40px;height:40px;border-radius:var(--nusa-radius-md);border:none;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all 0.15s;color:#fff}
+.kry-icon-btn svg{width:18px;height:18px}
+.kry-icon-btn svg path{fill:#fff}
+.kry-icon-btn:hover{transform:translateY(-1px);filter:brightness(1.05)}
+.kry-icon-btn:active{transform:scale(0.97)}
+.kry-icon-btn.green{background:var(--nusa-green);box-shadow:var(--nusa-shadow-green)}
+.kry-icon-btn.purple{background:var(--nusa-purple);box-shadow:var(--nusa-shadow-purple)}
+.kry-icon-btn.red{background:var(--nusa-red);box-shadow:var(--nusa-shadow-red)}
+.kry-icon-btn.gray{background:#6B7280;cursor:default;opacity:0.6;pointer-events:none}
+
+.kry-divider{height:1px;background:rgba(255,255,255,0.18);margin:16px 0;border:none;position:relative;z-index:1}
+
+/* ─── Stat Grid (4 columns inside hero) ─── */
+.kry-ringkasan{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;position:relative;z-index:1}
+.kry-ringkasan .kr-item{background:transparent;border-radius:var(--nusa-radius-sm);padding:4px 2px;text-align:center;cursor:pointer;transition:background 0.15s}
+.kry-ringkasan .kr-item:hover{background:rgba(255,255,255,0.08)}
+.kry-ringkasan .kr-icon-wrap{width:32px;height:32px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin:0 auto 4px}
+.kry-ringkasan .kr-icon-wrap svg{width:16px;height:16px}
+.kry-ringkasan .kr-val{font-size:16px;font-weight:700;color:#fff;letter-spacing:-0.01em;line-height:1.2;display:block}
+.kry-ringkasan .kr-label{font-size:9px;font-weight:600;color:rgba(255,255,255,0.85);text-transform:uppercase;letter-spacing:0.08em;margin-top:2px;display:block}
+.kry-ringkasan .kr-prod{font-size:8px;color:rgba(255,255,255,0.6);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1}
+
+/* ─── Buka Kasir CTA ─── */
+.kasir-cta{width:100%;background:var(--nusa-red);color:#fff;font-weight:700;font-size:var(--nusa-text-base);padding:16px 20px;border-radius:var(--nusa-radius-md);box-shadow:var(--nusa-shadow-red);border:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:all 0.15s ease;margin:0 20px 4px}
+.kasir-cta:hover{filter:brightness(1.05);transform:translateY(-1px)}
+.kasir-cta:active{transform:scale(0.99)}
+.kasir-cta svg{width:20px;height:20px}
+.kasir-cta svg path{fill:#fff}
+
+/* ─── Buka Kasir Modal (bottom-sheet) ─── */
+.kasir-modal-overlay{position:fixed;inset:0;z-index:9998;background:rgba(17,24,39,0.5);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);display:none;align-items:flex-end;justify-content:center}
+.kasir-modal-overlay.show{display:flex}
+.kasir-modal-sheet{width:100%;max-width:420px;background:var(--nusa-surface);border-top-left-radius:24px;border-top-right-radius:24px;padding:20px 20px 28px;max-height:85vh;overflow-y:auto;animation:nusaSlideUp 0.28s cubic-bezier(0.16,1,0.3,1) both}
+@keyframes nusaSlideUp{from{transform:translateY(100%);opacity:0.6}to{transform:translateY(0);opacity:1}}
+.kasir-modal-handle{width:40px;height:4px;border-radius:2px;background:var(--nusa-divider);margin:0 auto 16px}
+
+/* ─── Animations ─── */
+@keyframes nusa-fade-up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.nusa-fade-up{animation:nusa-fade-up 0.4s ease both}
 
 /* ─── Menu Grid ─── */
 .menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
@@ -598,67 +445,151 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 
   <div class="screen-container" id="screenContainer">
 
-    <!-- ═══ HOME ═══ -->
+    <!-- ═══ HOME ── ZAI Design System ═══ -->
     <div class="screen active" data-id="home">
-	      <div class="home-header">
-	        <div class="home-header-left">
-	          <button class="home-user-btn" id="homeUserBtn" onclick="logoutUser()" title="Ganti pengguna">👤</button>
-	          <div class="home-user-info">
-	            <div class="home-user-name" id="homeUserName">Toko Sembako Makmur</div>
-	            <div class="home-user-role" id="homeUserRole">Pusat</div>
-	          </div>
-	        </div>
+      <!-- ══ AppHeader ══ -->
+      <div class="home-header">
+        <div class="home-header-left">
+          <button class="home-user-btn" id="homeUserBtn" onclick="logoutUser()" title="Ganti pengguna">👤</button>
+          <div class="home-user-info">
+            <span class="home-user-name">NUSA</span>
+            <span class="home-user-role" style="font-size:11px;color:var(--nusa-text-secondary)" id="headerUserInfo">Belum login</span>
+          </div>
+        </div>
         <button class="home-notif" onclick="showToast('Tidak ada notifikasi')">
+          <span class="home-notif-dot"></span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
         </button>
       </div>
 
-		      <!-- ═══ Single Card Karyawan (Red Compact) ═══ -->
-		      <div class="kry-card-single" id="kryCardSingle">
-		        <div class="kry-main">
-		          <div class="kry-photo" id="kryPhoto">
-		            <span id="kryAvatar">—</span>
-		          </div>
-		          <div class="kry-info">
-		            <div class="kry-name" id="kryName">Belum absen</div>
-		            <div class="kry-role" id="kryRole">Login dulu</div>
-		            <div class="kry-stat" id="kryStat">—</div>
-		          </div>
-			          <div class="kry-btn-group">
-			            <button class="kry-icon-btn green" id="kryBtn" title="Absen">
-			              <svg viewBox="0 0 512 512"><path d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9z"/></svg>
-			            </button>
-			            <button class="kry-icon-btn blue" onclick="goScreen('presensi')" title="Riwayat Presensi">
-			              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></svg>
-			            </button>
-			          </div>
-		        </div>
-		        <div class="kry-ringkasan" id="kryRingkasan">
-		          <div class="kr-item">
-		            <div class="kr-svg-icon"><svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg></div>
-		            <div class="kr-val" id="kryOmset">Rp 0</div>
-		            <div class="kr-label">Penjualan</div>
-		          </div>
-		          <div class="kr-item">
-		            <div class="kr-svg-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
-		            <div class="kr-val" id="kryTrxCount">0</div>
-		            <div class="kr-label">Transaksi</div>
-		          </div>
-		          <div class="kr-item">
-		            <div class="kr-svg-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg></div>
-		            <div class="kr-val" id="kryAvg">Rp 0</div>
-		            <div class="kr-label">Rata-rata</div>
-		          </div>
-		          <div class="kr-item">
-		            <div class="kr-svg-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-		            <div class="kr-val" id="kryTopProd">—</div>
-		            <div class="kr-label">Terlaris</div>
-		          </div>
-		        </div>
-		      </div>
+      <!-- ══ StoreSelector ══ -->
+      <div class="store-card" onclick="goScreen('pengaturan')">
+        <div class="store-avatar">TM</div>
+        <div class="store-info">
+          <div class="store-name">Toko Sembako Makmur</div>
+          <div class="store-branch"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Pusat</div>
+        </div>
+        <svg class="store-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
 
-      <div class="menu-grid" id="homeMenuGrid">
+      <!-- ══ ProfileCard (Red Hero) ══ -->
+      <div class="kry-card-single" style="margin-top:14px">
+        <div class="kry-hero">
+          <div class="kry-hero-left">
+            <div class="kry-hero-avatar">
+              <span id="kryAvatar">—</span>
+            </div>
+            <div class="kry-hero-info">
+              <div class="kry-hero-name" id="kryName">Belum absen</div>
+              <div class="kry-hero-role" id="kryRole">Login dulu</div>
+              <div class="kry-hero-stat" id="kryStat">—</div>
+            </div>
+          </div>
+          <div class="kry-hero-actions">
+            <button class="kry-icon-btn purple" onclick="goScreen('presensi')" title="Riwayat Presensi">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></svg>
+            </button>
+            <button class="kry-icon-btn green" id="kryBtn" title="Absen">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <hr class="kry-divider">
+
+        <!-- 4 Stats -->
+        <div class="kry-ringkasan" id="kryRingkasan">
+          <div class="kr-item">
+            <div class="kr-icon-wrap" style="background:rgba(245,158,11,0.95)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <div class="kr-val" id="kryOmset">Rp 0</div>
+            <div class="kr-label">Penjualan</div>
+          </div>
+          <div class="kr-item">
+            <div class="kr-icon-wrap" style="background:rgba(255,255,255,0.22)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            </div>
+            <div class="kr-val" id="kryTrxCount">0</div>
+            <div class="kr-label">Transaksi</div>
+          </div>
+          <div class="kr-item">
+            <div class="kr-icon-wrap" style="background:rgba(255,255,255,0.22)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            </div>
+            <div class="kr-val" id="kryAvg">Rp 0</div>
+            <div class="kr-label">Rata-rata</div>
+          </div>
+          <div class="kr-item">
+            <div class="kr-icon-wrap" style="background:rgba(255,255,255,0.22)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div class="kr-val" id="kryTopProd">—</div>
+            <div class="kr-label">Terlaris</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ Menu Grid (3x3) ══ -->
+      <div class="menu-grid" id="homeMenuGrid" style="padding:0 20px">
         <!-- diisi JS -->
+      </div>
+
+      <!-- ══ Buka Kasir CTA ══ -->
+      <button class="kasir-cta" onclick="showKasirModal()" style="margin-top:4px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
+        Buka Kasir
+      </button>
+    </div>
+
+    <!-- ═══ BUKA KASIR MODAL (bottom-sheet) ═══ -->
+    <div class="kasir-modal-overlay" id="kasirModalOverlay" onclick="closeKasirModal(event)">
+      <div class="kasir-modal-sheet" onclick="event.stopPropagation()">
+        <div class="kasir-modal-handle"></div>
+
+        <!-- Header -->
+        <div class="flex items-start justify-between" style="margin-bottom:20px;display:flex">
+          <div class="flex items-center gap-3" style="display:flex;align-items:center;gap:12px">
+            <div style="width:44px;height:44px;border-radius:12px;background:var(--nusa-red-soft);display:flex;align-items:center;justify-content:center;color:var(--nusa-red);flex-shrink:0">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
+            </div>
+            <div style="display:flex;flex-direction:column;line-height:1.2">
+              <span style="font-size:18px;font-weight:700;color:var(--nusa-text-primary)">Buka Kasir</span>
+              <span style="font-size:13px;color:var(--nusa-text-secondary)">Mulai sesi penjualan hari ini</span>
+            </div>
+          </div>
+          <button onclick="closeKasirModal()" style="width:36px;height:36px;border-radius:50%;border:none;background:transparent;color:var(--nusa-text-secondary);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0" aria-label="Tutup">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+
+        <!-- Toko info -->
+        <div style="display:flex;align-items:center;gap:8px;border-radius:12px;padding:12px 16px;margin-bottom:16px;background:var(--nusa-red-50);border:1px solid var(--nusa-red-soft)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--nusa-red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/></svg>
+          <span style="font-size:13px;color:var(--nusa-text-primary)">Toko Sembako Makmur — Pusat</span>
+        </div>
+
+        <!-- Saldo awal -->
+        <label style="font-size:13px;font-weight:600;color:var(--nusa-text-primary);display:block;margin-bottom:8px">Saldo Awal Kas</label>
+        <div style="position:relative;margin-bottom:8px">
+          <span style="position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:16px;font-weight:600;color:var(--nusa-text-secondary);pointer-events:none">Rp</span>
+          <input type="text" inputmode="numeric" id="kasirSaldoInput" placeholder="0" autofocus style="width:100%;padding:14px 16px 14px 44px;border-radius:12px;border:1px solid var(--nusa-border);background:var(--nusa-surface);font-size:18px;font-weight:700;text-align:right;outline:none;color:var(--nusa-text-primary);font-family:var(--nusa-font);transition:border-color 0.15s;box-sizing:border-box" onfocus="this.style.borderColor='var(--nusa-red)'" onblur="this.style.borderColor='var(--nusa-border)'" onkeydown="if(event.key==='Enter')confirmKasirModal()">
+        </div>
+        <p style="font-size:12px;color:var(--nusa-text-secondary);margin:0 0 12px">Masukkan jumlah uang tunai yang ada di laci kasir saat ini.</p>
+
+        <!-- Quick chips -->
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px">
+          <button onclick="document.getElementById('kasirSaldoInput').value='50.000'" style="padding:6px 12px;border-radius:999px;border:1px solid var(--nusa-divider);background:transparent;font-size:12px;font-weight:500;color:var(--nusa-text-secondary);cursor:pointer;font-family:var(--nusa-font)">Rp 50.000</button>
+          <button onclick="document.getElementById('kasirSaldoInput').value='100.000'" style="padding:6px 12px;border-radius:999px;border:1px solid var(--nusa-divider);background:transparent;font-size:12px;font-weight:500;color:var(--nusa-text-secondary);cursor:pointer;font-family:var(--nusa-font)">Rp 100.000</button>
+          <button onclick="document.getElementById('kasirSaldoInput').value='200.000'" style="padding:6px 12px;border-radius:999px;border:1px solid var(--nusa-divider);background:transparent;font-size:12px;font-weight:500;color:var(--nusa-text-secondary);cursor:pointer;font-family:var(--nusa-font)">Rp 200.000</button>
+          <button onclick="document.getElementById('kasirSaldoInput').value='500.000'" style="padding:6px 12px;border-radius:999px;border:1px solid var(--nusa-divider);background:transparent;font-size:12px;font-weight:500;color:var(--nusa-text-secondary);cursor:pointer;font-family:var(--nusa-font)">Rp 500.000</button>
+        </div>
+
+        <!-- CTA -->
+        <button onclick="confirmKasirModal()" class="kasir-cta" style="margin:0">
+          Mulai Sesi Kasir
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
       </div>
     </div>
 
@@ -1776,11 +1707,11 @@ function updateKryCard() {
     nameEl.textContent = 'Belum absen';
     roleEl.textContent = 'Silakan login untuk memulai';
     statEl.textContent = '';
-    btnEl.className = 'kry-icon-btn green';
-    btnEl.innerHTML = '<svg viewBox="0 0 512 512"><path d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9z"/></svg>';
-    btnEl.title = 'Login';
-    btnEl.onclick = function(){ showLogin(); };
-    return;
+	    btnEl.className = 'kry-icon-btn green';
+	    btnEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>';
+	    btnEl.title = 'Login';
+	    btnEl.onclick = function(){ showLogin(); };
+	    return;
   }
 
   // Tampilkan foto/initials
@@ -1797,27 +1728,52 @@ function updateKryCard() {
     // Belum absen
     roleEl.textContent = currentUser.role + ' · ' + currentUser.branch;
     statEl.textContent = '⏳ Belum absen hari ini';
-    btnEl.className = 'kry-icon-btn green';
-    btnEl.innerHTML = '<svg viewBox="0 0 512 512"><path d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9z"/></svg>';
-    btnEl.title = 'Absen Masuk';
-    btnEl.onclick = function(){ showPinPopup('masuk'); };
-  } else if (att.clockIn && !att.clockOut) {
-    // Lagi shift
-    roleEl.textContent = currentUser.role + ' · Shift sejak ' + att.clockIn;
-    statEl.textContent = '📊 ' + (att.trxCount || 0) + ' transaksi · Rp ' + (att.trxTotal || 0).toLocaleString('id-ID');
-    btnEl.className = 'kry-icon-btn red';
-    btnEl.innerHTML = '<svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9z"/></svg>';
-    btnEl.title = 'Akhiri Shift';
-    btnEl.onclick = function(){ showPinPopup('pulang'); };
-  } else {
-    // Udah selesai
-    roleEl.textContent = currentUser.role + ' · Shift selesai ' + att.clockOut;
-    statEl.textContent = '✅ Selesai · ' + (att.trxCount || 0) + ' transaksi';
-    btnEl.className = 'kry-icon-btn gray';
-    btnEl.innerHTML = '<svg viewBox="0 0 448 512"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>';
+	    btnEl.className = 'kry-icon-btn green';
+	    btnEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>';
+	    btnEl.title = 'Absen Masuk';
+	    btnEl.onclick = function(){ showPinPopup('masuk'); };
+	  } else if (att.clockIn && !att.clockOut) {
+	    // Lagi shift
+	    roleEl.textContent = currentUser.role + ' · Shift sejak ' + att.clockIn;
+	    statEl.textContent = '📊 ' + (att.trxCount || 0) + ' transaksi · Rp ' + (att.trxTotal || 0).toLocaleString('id-ID');
+	    btnEl.className = 'kry-icon-btn red';
+	    btnEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>';
+	    btnEl.title = 'Akhiri Shift';
+	    btnEl.onclick = function(){ showPinPopup('pulang'); };
+	  } else {
+	    // Udah selesai
+	    roleEl.textContent = currentUser.role + ' · Shift selesai ' + att.clockOut;
+	    statEl.textContent = '✅ Selesai · ' + (att.trxCount || 0) + ' transaksi';
+	    btnEl.className = 'kry-icon-btn gray';
+	    btnEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
     btnEl.title = 'Selesai';
     btnEl.onclick = null;
   }
+}
+
+// ═══ BUKA KASIR MODAL ═══
+function showKasirModal() {
+  document.getElementById('kasirModalOverlay').classList.add('show');
+  setTimeout(function(){
+    var inp = document.getElementById('kasirSaldoInput');
+    if(inp) inp.focus();
+  }, 300);
+}
+function closeKasirModal(e) {
+  if(e && e.target !== e.currentTarget) return;
+  document.getElementById('kasirModalOverlay').classList.remove('show');
+}
+function confirmKasirModal() {
+  var inp = document.getElementById('kasirSaldoInput');
+  var val = inp.value.replace(/[^\d]/g, '');
+  if(!val){
+    showToast('Saldo awal wajib diisi');
+    inp.focus();
+    return;
+  }
+  var formatted = Number(val).toLocaleString('id-ID');
+  showToast('Kasir dibuka! Saldo awal: Rp ' + formatted);
+  closeKasirModal();
 }
 
 function showLogin() {
