@@ -435,9 +435,8 @@ body{font-family:var(--nusa-font);background:var(--nusa-bg);color:var(--nusa-tex
 </div>
 
 <div class="device-frame">
-  <div class="screen-header-bar">
-    <span style="font-size:13px;font-weight:600;letter-spacing:-0.02em">NUSA</span>
-    <span style="font-size:11px;color:#9CA3AF" id="headerUserInfo">Belum login</span>
+  <div class="screen-header-bar" style="padding:6px 20px 0">
+    <div style="flex:1"></div>
     <button onclick="toggleTheme()" style="width:28px;height:28px;border-radius:50%;border:none;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;margin-left:auto;font-size:14px;color:var(--text2)" title="Toggle tema">
       <span id="themeIcon">☀️</span>
     </button>
@@ -453,7 +452,7 @@ body{font-family:var(--nusa-font);background:var(--nusa-bg);color:var(--nusa-tex
           <button class="home-user-btn" id="homeUserBtn" onclick="logoutUser()" title="Ganti pengguna">👤</button>
           <div class="home-user-info">
             <span class="home-user-name">NUSA</span>
-            <span class="home-user-role" style="font-size:11px;color:var(--nusa-text-secondary)" id="headerUserInfo">Belum login</span>
+            <span class="home-user-role" id="headerUserInfo" style="font-size:11px;color:var(--nusa-text-secondary)">Belum login</span>
           </div>
         </div>
         <button class="home-notif" onclick="showToast('Tidak ada notifikasi')">
