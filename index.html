@@ -31,6 +31,32 @@
   --ease-gentle:cubic-bezier(0.25,0.1,0.25,1);
   --card-glow:transparent;
   --card-sheen:transparent;
+
+  /* ═══ NUSA DESIGN TOKENS (ZAI) ═══ */
+  --nusa-red:#E63946;
+  --nusa-red-dark:#C1121F;
+  --nusa-red-soft:#FDE8EA;
+  --nusa-green:#10B981;
+  --nusa-purple:#8B5CF6;
+  --nusa-gold:#F59E0B;
+  --nusa-bg:#F7F7F9;
+  --nusa-surface:#FFFFFF;
+  --nusa-text-primary:#1F2937;
+  --nusa-text-secondary:#6B7280;
+  --nusa-text-tertiary:#9CA3AF;
+  --nusa-border:#F3F4F6;
+  --nusa-divider:#E5E7EB;
+  --nusa-font:'Inter',ui-sans-serif,system-ui,-apple-system,sans-serif;
+  --nusa-radius-sm:8px;
+  --nusa-radius-md:12px;
+  --nusa-radius-lg:16px;
+  --nusa-radius-xl:20px;
+  --nusa-shadow-xs:0 1px 2px rgba(17,24,39,0.04);
+  --nusa-shadow-sm:0 1px 3px rgba(17,24,39,0.06),0 1px 2px rgba(17,24,39,0.04);
+  --nusa-shadow-md:0 4px 12px rgba(17,24,39,0.08);
+  --nusa-shadow-red:0 8px 24px rgba(230,57,70,0.28);
+  --nusa-shadow-green:0 4px 12px rgba(16,185,129,0.3);
+  --nusa-shadow-purple:0 4px 12px rgba(139,92,246,0.3);
 }
 
 [data-theme="dark"]{
@@ -46,9 +72,22 @@
   --card-sheen:linear-gradient(90deg,transparent,rgba(255,255,255,0.20),transparent);
   --red-soft:rgba(229,57,53,0.12);
   --red-glow:rgba(229,57,53,0.25);
+  --nusa-bg:#0F172A;
+  --nusa-surface:#1E293B;
+  --nusa-text-primary:#F1F5F9;
+  --nusa-text-secondary:#94A3B8;
+  --nusa-text-tertiary:#64748B;
+  --nusa-border:rgba(255,255,255,0.08);
+  --nusa-divider:rgba(255,255,255,0.06);
+  --nusa-shadow-xs:0 1px 2px rgba(0,0,0,0.2);
+  --nusa-shadow-sm:0 1px 3px rgba(0,0,0,0.3);
+  --nusa-shadow-md:0 4px 12px rgba(0,0,0,0.4);
+  --nusa-shadow-red:0 8px 24px rgba(230,57,70,0.25);
+  --nusa-shadow-green:0 4px 12px rgba(16,185,129,0.2);
+  --nusa-shadow-purple:0 4px 12px rgba(139,92,246,0.2);
 }
 
-body{font-family:var(--nusa-font);background:var(--nusa-bg);color:var(--nusa-text-primary);-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;min-height:100vh;transition:background 0.3s,color 0.3s}
+body{font-family:var(--nusa-font);background:var(--nusa-bg);color:var(--nusa-text-primary);-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:0;transition:background 0.3s,color 0.3s}
 
 /* ─── Dark Mode Ambient ─── */
 [data-theme="dark"] body::before{
